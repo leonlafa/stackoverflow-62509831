@@ -1,0 +1,40 @@
+.example-selected-value {
+  margin: 15px 0;
+}
+
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo);
+$app-purple: mat-palette($mat-teal);
+
+$app-theme: mat-light-theme($app-primary, $app-purple);
+// https://material.io/archive/guidelines/style/color.html#color-color-palette
+// Create a config with the default typography levels.
+$config: mat-typography-config();
+@mixin mix-app-theme($app-theme) {
+  .mat-button-toggle-checked {
+    background-color: mat-color($app-purple, 400);
+     @extend .text-color;
+  }
+  .mat-button-toggle-checked.cdk-focused { 
+  background-color: mat-color($app-purple, 600);
+    @extend .text-color;
+  }
+  .mat-button-toggle-checked.mat-button-toggle-disabled {
+    background-color: mat-color($app-purple, 200);
+    color: mat-color($app-purple, default-contrast);
+  }
+}
+
+.text-color {
+  * {
+    color: rgb(255, 255, 255);
+  }
+
+  color: rgba(255, 255, 255, 0.25);
+}
+
+// Include the mixin
+@include mix-app-theme($app-theme);
